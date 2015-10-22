@@ -29,6 +29,8 @@ def view(cls):
     """
     @wraps(cls)
     def wrapper(request, **kwargs):
+        if hasattr(cls, 'as_view'):
+            return cls.as_view()(request, **kwargs)
         obj = cls(request, **kwargs)
         handler = getattr(obj, request.method.lower(), None)
         if handler is None:

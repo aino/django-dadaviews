@@ -10,7 +10,7 @@ class TestCommand(test):
 
 setup(
     name='django-dadaviews',
-    version='0.0.1',
+    version='0.0.2',
     description='A very simple class based views implementation for Django.',
     long_description=open('README.rst').read(),
     author='Mikko Hellsing',
