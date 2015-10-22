@@ -1,5 +1,5 @@
 import re
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, JsonResponse
 from django.template.response import TemplateResponse
 from functools import wraps
 
@@ -35,7 +35,10 @@ def view(cls):
         handler = getattr(obj, request.method.lower(), None)
         if handler is None:
             return HttpResponseNotAllowed('%s not allowed' % request.method)
-        return obj.setup(obj.c) or handler(obj.c) or obj.render(obj.c)
+        res = obj.setup(obj.c) or handler(obj.c) or obj.render(obj.c)
+        if isinstance(res, (dict, list)):
+            return JsonResponse(res)
+        return res
     return wrapper
 
 
