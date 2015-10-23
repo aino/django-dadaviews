@@ -37,7 +37,7 @@ def view(cls):
             return HttpResponseNotAllowed('%s not allowed' % request.method)
         res = obj.setup(obj.c) or handler(obj.c) or obj.render(obj.c)
         if isinstance(res, (dict, list)):
-            return JsonResponse(res)
+            return JsonResponse(res, safe=False)
         return res
     return wrapper
 
