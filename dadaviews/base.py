@@ -47,6 +47,7 @@ class View(object):
         self.c = Context()
         self.r = request
         self.u = request.user
+        self.c.request = self.r
         self.c.user = self.u
         for k, v in kwargs.items():
             setattr(self, k, v)
